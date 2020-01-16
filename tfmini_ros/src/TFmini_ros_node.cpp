@@ -13,13 +13,13 @@ int main(int argc, char **argv)
   nh.param("baud_rate", baud_rate, 115200);
 
   tfmini_obj = new benewake::TFmini(portName, baud_rate);
-  ros::Publisher pub_range = nh.advertise<sensor_msgs::Range>(id, 1000, true);
+  ros::Publisher pub_range = nh.advertise<sensor_msgs::Range>("/kiwibot/distance_sensor", 1000, true);
   sensor_msgs::Range TFmini_range;
   TFmini_range.radiation_type = sensor_msgs::Range::INFRARED;
   TFmini_range.field_of_view = 0.04;
   TFmini_range.min_range = 0.3;
   TFmini_range.max_range = 12;
-  TFmini_range.header.frame_id = id;
+  TFmini_range.header.frame_id = "distance_sensor_link";
   float dist = 0;
   ROS_INFO_STREAM("Start processing ...");
 
